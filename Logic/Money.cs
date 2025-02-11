@@ -1,7 +1,7 @@
 namespace Logic;
 
 //Value Object
-public class Money
+public class Money : ValueObject<Money>
 {
 	public int Cents1Count { get; private set; }
 	public int Cents10Count { get; private set; }
@@ -35,5 +35,30 @@ public class Money
 			left.Dollar1Count + right.Dollar1Count,
 			left.Dollar5Count + right.Dollar5Count,
 			left.Dollar20Count + right.Dollar20Count);
+	}
+
+	protected override bool EqualsCore(Money other)
+	{
+		return Cents1Count == other.Cents1Count
+			&& Cents10Count == other.Cents10Count
+			&& Cents25Count == other.Cents25Count
+			&& Dollar1Count == other.Dollar1Count
+			&& Dollar5Count == other.Dollar5Count
+			&& Dollar20Count == other.Dollar20Count;
+	}
+
+	protected override int GetHashCodeCore()
+	{
+		unchecked
+		{
+			int hashCode = Cents1Count;
+			hashCode = (hashCode * 397) ^ Cents10Count;
+			hashCode = (hashCode * 397) ^ Cents25Count;
+			hashCode = (hashCode * 397) ^ Dollar1Count;
+			hashCode = (hashCode * 397) ^ Dollar5Count;
+			hashCode = (hashCode * 397) ^ Dollar20Count;
+			return hashCode;
+		}
+		
 	}
 }
