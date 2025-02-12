@@ -94,4 +94,10 @@ public class Money : ValueObject<Money>
 			return hashCode;
 		}
 	}
+
+	public override string ToString()
+	{
+		if (Amount < 1) return "c" + Amount * 100;
+		return "$" + Amount.ToString("0.00");
+	}
 }
