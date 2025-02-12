@@ -24,7 +24,9 @@ namespace ConsoleApp.Common
 
         protected void Notify([CallerMemberName] string propertyName = null)
         {
+            // Console.WriteLine("Notify action " + propertyName);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            
         }
     }
 }
