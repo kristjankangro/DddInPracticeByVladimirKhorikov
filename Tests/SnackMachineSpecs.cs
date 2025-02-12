@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using Logic;
 using Xunit;

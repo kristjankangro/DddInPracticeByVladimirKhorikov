@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Logic;
 using Xunit;
 
@@ -80,9 +81,7 @@ public class MoneySpecs
 		int dollar20,
 		decimal expected)
 	{
-		
 		new Money(cents1, cents10, cents25, dollar1, dollar5, dollar20).Amount.Should().Be(expected);
-		
 	}
 
 	[Fact]
@@ -92,7 +91,7 @@ public class MoneySpecs
 		var money2 = new Money(1, 1, 1, 1, 1, 1);
 
 		Money result = money1 - money2;
-		
+
 		result.Cents1Count.Should().Be(9);
 		result.Cents10Count.Should().Be(9);
 		result.Cents25Count.Should().Be(9);
@@ -100,7 +99,7 @@ public class MoneySpecs
 		result.Dollar5Count.Should().Be(9);
 		result.Dollar20Count.Should().Be(9);
 	}
-	
+
 	[Fact]
 	public void Cannot_substract_more_than_exists()
 	{
@@ -111,7 +110,24 @@ public class MoneySpecs
 		{
 			var money = money1 - money2;
 		};
-		
+
 		action.Should().Throw<InvalidOperationException>();
+	}
+
+	[Theory]
+	[InlineData(1,0,0,0,0,0,"c1,00")]
+	public void MoneyToString_ShouldDisplayMoneyWithDollarOrCentSign(
+		int cents1,
+		int cents10,
+		int cents25,
+		int dollar1,
+		int dollar5,
+		int dollar20,
+		string expected)
+	{
+		var money1 = new Money(cents1, cents10, cents25, dollar1, dollar5, dollar20);
+		
+		
+		money1.ToString().Should().Be(expected);
 	}
 }
