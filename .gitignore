@@ -4,6 +4,6 @@
 # IntelliJ project files
 .idea
 *.iml
-obj/
-bin/
+#obj/
+#bin/
 packages
