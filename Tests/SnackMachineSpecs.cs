@@ -15,7 +15,7 @@ public class SnackMachineSpecs
 		snackMachine.InsertMoney(Cent);
 		snackMachine.ReturnMoney();
 
-		snackMachine.MoneyInTransaction.Amount.Should().Be(0);
+		snackMachine.MoneyInTransaction.Should().Be(0);
 	}
 
 	[Fact]
@@ -25,7 +25,7 @@ public class SnackMachineSpecs
 		snackMachine.InsertMoney(Cent);
 		snackMachine.InsertMoney(Dollar);
 		
-		snackMachine.MoneyInTransaction.Amount.Should().Be(1.01m);
+		snackMachine.MoneyInTransaction.Should().Be(1.01m);
 	}
 
 	[Fact]
@@ -46,7 +46,7 @@ public class SnackMachineSpecs
 		snackMachine.InsertMoney(Dollar);
 		snackMachine.BuySnack(1);
 		
-		snackMachine.MoneyInTransaction.Should().Be(Zero);
+		snackMachine.MoneyInTransaction.Should().Be(0);
 		snackMachine.MoneyInside.Amount.Should().Be(1);
 
 		snackMachine.GetSnackPile(1).Quantity.Should().Be(9);
@@ -73,5 +73,35 @@ public class SnackMachineSpecs
 		Action action = () => snackMachine.BuySnack(1);
 		
 		action.Should().Throw<InvalidOperationException>();
+	}
+
+	[Fact]
+
+	public void BuySnack_ReturnHighestDenominatorMoneyFirst()
+	{
+			var snackMachine = new SnackMachine();
+			snackMachine
+				.LoadMoney(Dollar)
+				.InsertMoney(Cent25)
+				.InsertMoney(Cent25)
+				.InsertMoney(Cent25)
+				.InsertMoney(Cent25)
+				.ReturnMoney();
+			
+			snackMachine.MoneyInside.Cents25Count.Should().Be(4);
+			snackMachine.MoneyInside.Dollar1Count.Should().Be(0);
+	}
+
+	[Fact]
+	public void BuySnack_ReturnChangeAfter()
+	{
+		var snackMachine = new SnackMachine()
+			.LoadSnacks(1, new SnackPile(new Snack("mars bar"), 1, 0.5m))
+			.LoadMoney(Cent10*10)
+			.InsertMoney(Dollar)
+			.BuySnack(1);
+		
+		snackMachine.MoneyInside.Amount.Should().Be(1.5m);
+		snackMachine.MoneyInTransaction.Should().Be(0);
 	}
 }

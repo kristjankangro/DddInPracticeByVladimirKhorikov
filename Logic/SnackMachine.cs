@@ -7,7 +7,7 @@ public class SnackMachine : AggregateRoot
 	public SnackMachine()
 	{
 		MoneyInside = Zero;
-		MoneyInTransaction = Zero;
+		MoneyInTransaction = 0;
 		Slots = new List<Slot>
 		{
 			new Slot(this, 1),
@@ -17,32 +17,40 @@ public class SnackMachine : AggregateRoot
 	}
 
 	public virtual Money MoneyInside { get; protected set; }
-	public virtual Money MoneyInTransaction { get; protected set; }
+	public virtual decimal MoneyInTransaction { get; protected set; }
 	protected virtual IList<Slot> Slots { get; set; }
 
-	public virtual void InsertMoney(Money money)
+	public virtual SnackMachine InsertMoney(Money money)
 	{
 		Money[] allowed = [Cent, Cent10, Cent25, Dollar, Dollar5, Dollar20];
 		if (!allowed.Contains(money)) throw new InvalidOperationException("Invalid money");
 
-		MoneyInTransaction += money;
+		MoneyInTransaction += money.Amount;
+		MoneyInside += money;
+		return this;
 	}
 
 	public virtual void ReturnMoney()
 	{
-		MoneyInTransaction = Zero;
+		Money returnMoney = MoneyInside.Allocate(MoneyInTransaction);
+		MoneyInside -= returnMoney;
+		MoneyInTransaction = 0;
 	}
 
-	public virtual void BuySnack(int position)
+	public virtual SnackMachine BuySnack(int position)
 	{
 		var slot = Slots.FirstOrDefault(s => s.Position == position);
-		
-		if (MoneyInTransaction.Amount < slot.SnackPile.Price) throw new InvalidOperationException();
-		
+
+		if (MoneyInTransaction < slot.SnackPile.Price) throw new InvalidOperationException();
+
 		slot.SnackPile = slot.SnackPile.SubtractOne();
+
+		var change = MoneyInside.Allocate(MoneyInTransaction - slot.SnackPile.Price);
+		if (change.Amount < MoneyInTransaction - slot.SnackPile.Price) throw new InvalidOperationException();
 		
-		MoneyInside += MoneyInTransaction;
-		MoneyInTransaction = Zero;
+		MoneyInside -= change;
+		MoneyInTransaction = 0;
+		return this;
 	}
 
 	public virtual SnackMachine LoadSnacks(int position, SnackPile snack)
@@ -55,5 +63,11 @@ public class SnackMachine : AggregateRoot
 	public virtual SnackPile GetSnackPile(int postion)
 	{
 		return Slots.Single(s => s.Position == postion).SnackPile;
+	}
+
+	public virtual SnackMachine LoadMoney(Money money)
+	{
+		MoneyInside += money;
+		return this;
 	}
 }

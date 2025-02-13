@@ -11,11 +11,11 @@ public class Money : ValueObject<Money>
 	public int Dollar20Count { get; }
 
 	public decimal Amount => Cents1Count * 0.01m +
-	                        Cents10Count * 0.1m
-	                        + Cents25Count * 0.25m
-	                        + Dollar1Count
-	                        + Dollar5Count * 5
-	                        + Dollar20Count * 20;
+	                         Cents10Count * 0.1m
+	                         + Cents25Count * 0.25m
+	                         + Dollar1Count
+	                         + Dollar5Count * 5
+	                         + Dollar20Count * 20;
 
 
 	public static Money Zero => new(0, 0, 0, 0, 0, 0);
@@ -26,8 +26,10 @@ public class Money : ValueObject<Money>
 	public static Money Dollar5 => new Money(0, 0, 0, 0, 1, 0);
 	public static Money Dollar20 => new Money(0, 0, 0, 0, 0, 1);
 
-	private Money(){}
-	
+	private Money()
+	{
+	}
+
 	public Money(
 		int cents1Count,
 		int cents10Count,
@@ -73,6 +75,17 @@ public class Money : ValueObject<Money>
 			left.Dollar20Count - right.Dollar20Count);
 	}
 
+	public static Money operator *(Money left, int multiplier)
+	{
+		return new Money(
+			left.Cents1Count * multiplier,
+			left.Cents10Count * multiplier,
+			left.Cents25Count * multiplier,
+			left.Dollar1Count * multiplier,
+			left.Dollar5Count * multiplier,
+			left.Dollar20Count * multiplier);
+	}
+
 	protected override bool EqualsCore(Money other)
 	{
 		return Cents1Count == other.Cents1Count
@@ -101,5 +114,33 @@ public class Money : ValueObject<Money>
 	{
 		if (Amount < 1) return "c" + Amount * 100;
 		return "$" + Amount.ToString("0.00");
+	}
+
+	public Money Allocate(decimal amount)
+	{
+		int twentyDollarCount = Math.Min((int)(amount / 20), Dollar20Count);
+		amount = amount - twentyDollarCount * 20;
+
+		int fiveDollarCount = Math.Min((int)(amount / 5), Dollar5Count);
+		amount = amount - fiveDollarCount * 5;
+
+		int oneDollarCount = Math.Min((int)amount, Dollar1Count);
+		amount = amount - oneDollarCount;
+
+		int quarterCount = Math.Min((int)(amount / 0.25m), Cents25Count);
+		amount = amount - quarterCount * 0.25m;
+
+		int tenCentCount = Math.Min((int)(amount / 0.1m), Cents10Count);
+		amount = amount - tenCentCount * 0.1m;
+
+		int oneCentCount = Math.Min((int)(amount / 0.01m), Cents1Count);
+
+		return new Money(
+			oneCentCount,
+			tenCentCount,
+			quarterCount,
+			oneDollarCount,
+			fiveDollarCount,
+			twentyDollarCount);
 	}
 }

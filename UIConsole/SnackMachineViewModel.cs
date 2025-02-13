@@ -13,7 +13,7 @@ namespace ConsoleApp
         private string _message;
         public override string Caption => "Snack Machine";
         public string MoneyInTransaction => $"Current money in transaction:  {_snackMachine.MoneyInTransaction}";
-        public Money MoneyInside => _snackMachine.MoneyInTransaction + _snackMachine.MoneyInside;
+        public Money MoneyInside =>_snackMachine.MoneyInside;
         
 
         public string Message
