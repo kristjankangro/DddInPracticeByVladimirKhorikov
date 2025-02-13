@@ -3,7 +3,7 @@ using Logic;
 using NHibernate;
 
 namespace ConsoleApp.Common;
-
+//unused
 public class MainViewModel : ViewModel
 {
     public MainViewModel()

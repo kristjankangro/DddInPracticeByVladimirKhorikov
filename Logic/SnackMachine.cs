@@ -2,20 +2,29 @@
 
 namespace Logic;
 
-public class SnackMachine : Entity
+public class SnackMachine : AggregateRoot
 {
 	public SnackMachine()
 	{
+		MoneyInside = Zero;
+		MoneyInTransaction = Zero;
+		Slots = new List<Slot>
+		{
+			new Slot(this, 1),
+			new Slot(this, 2),
+			new Slot(this, 3),
+		};
 	}
 
-	public virtual Money MoneyInside { get; protected set; } = Zero;
-	public virtual Money MoneyInTransaction { get; protected set; } = Zero;
+	public virtual Money MoneyInside { get; protected set; }
+	public virtual Money MoneyInTransaction { get; protected set; }
+	protected virtual IList<Slot> Slots { get; set; }
 
 	public virtual void InsertMoney(Money money)
 	{
 		Money[] allowed = [Cent, Cent10, Cent25, Dollar, Dollar5, Dollar20];
 		if (!allowed.Contains(money)) throw new InvalidOperationException("Invalid money");
-		
+
 		MoneyInTransaction += money;
 	}
 
@@ -24,9 +33,23 @@ public class SnackMachine : Entity
 		MoneyInTransaction = Zero;
 	}
 
-	public virtual void BuySnack()
+	public virtual void BuySnack(int position)
 	{
+		var slot = Slots.FirstOrDefault(s => s.Position == position);
+		slot.SnackPile.SubtractOne();
+		
 		MoneyInside += MoneyInTransaction;
 		MoneyInTransaction = Zero;
+	}
+
+	public virtual void LoadSnacks(int position, SnackPile snack)
+	{
+		var slot = Slots.Single(s => s.Position == position);
+		slot.SnackPile = snack;
+	}
+
+	public virtual SnackPile GetSnackPile(int slotId)
+	{
+		return Slots.Single(s => s.Position == slotId).SnackPile;
 	}
 }

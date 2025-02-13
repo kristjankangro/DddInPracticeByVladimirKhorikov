@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 using ConsoleApp.Common;
+using DddInPractice.Logic;
 using Logic;
 using NHibernate;
 
@@ -13,7 +14,7 @@ namespace ConsoleApp
         public override string Caption => "Snack Machine";
         public string MoneyInTransaction => $"Current money in transaction:  {_snackMachine.MoneyInTransaction}";
         public Money MoneyInside => _snackMachine.MoneyInTransaction + _snackMachine.MoneyInside;
-
+        
 
         public string Message
         {
@@ -52,7 +53,13 @@ namespace ConsoleApp
 
         private void BuySnack()
         {
-            _snackMachine.BuySnack();
+            _snackMachine.BuySnack(1);
+            using (var session = SessionFactory.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                session.SaveOrUpdate(_snackMachine);
+                transaction.Commit();
+            }
             NotifyClient("You bought a snack");
         }
 
@@ -75,5 +82,7 @@ namespace ConsoleApp
             Message = message;
             Console.WriteLine(Message);
         }
+
+        
     }
 }
