@@ -61,4 +61,17 @@ public class SnackMachineSpecs
 		
 		action.Should().Throw<InvalidOperationException>();
 	}
+
+	[Fact]
+	public void CannotBuySnack_NotenoughMoneyInserted()
+	{
+		var snackMachine = new SnackMachine();
+		snackMachine
+			.LoadSnacks(1, new SnackPile(new Snack("mars bar"), 10, 3))
+			.InsertMoney(Dollar);
+		
+		Action action = () => snackMachine.BuySnack(1);
+		
+		action.Should().Throw<InvalidOperationException>();
+	}
 }

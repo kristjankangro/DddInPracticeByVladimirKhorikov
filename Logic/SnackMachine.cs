@@ -36,16 +36,20 @@ public class SnackMachine : AggregateRoot
 	public virtual void BuySnack(int position)
 	{
 		var slot = Slots.FirstOrDefault(s => s.Position == position);
+		
+		if (MoneyInTransaction.Amount < slot.SnackPile.Price) throw new InvalidOperationException();
+		
 		slot.SnackPile = slot.SnackPile.SubtractOne();
 		
 		MoneyInside += MoneyInTransaction;
 		MoneyInTransaction = Zero;
 	}
 
-	public virtual void LoadSnacks(int position, SnackPile snack)
+	public virtual SnackMachine LoadSnacks(int position, SnackPile snack)
 	{
 		var slot = Slots.Single(s => s.Position == position);
 		slot.SnackPile = snack;
+		return this;
 	}
 
 	public virtual SnackPile GetSnackPile(int postion)

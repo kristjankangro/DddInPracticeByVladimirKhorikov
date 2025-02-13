@@ -12,7 +12,9 @@ public sealed class SnackPile : ValueObject<SnackPile>
 
 	public SnackPile(Snack snack, int quantity, decimal price)
 	{
-		if (quantity < 0 || price < 0 || price % 0.01m > 0) 
+		if (quantity < 0 
+		    || price < 0 
+		    || price % 0.01m > 0) 
 			throw new InvalidOperationException();
 
 		Snack = snack;
