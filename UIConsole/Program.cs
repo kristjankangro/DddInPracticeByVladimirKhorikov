@@ -1,45 +1,26 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using ConsoleApp;
+using DddInPractice.Logic;
 using Logic;
+using NHibernate;
 
-Initer.Init(@"Server=(localdb)\MSSQLLocalDB;Database=DddInPractice;Trusted_Connection=true");
-
-new UseCases().Return();
-new UseCases().BuySnack();
-
-
-
-Console.WriteLine("Hello, World!");
-
-public class UseCases
+internal class Program
 {
-	private readonly SnackMachineViewModel _viewModel = new SnackMachineViewModel(new SnackMachine());
-
-	public void Return()
+	public static void Main(string[] args)
 	{
-		Console.WriteLine(">>insert money but return");
-		_viewModel.InsertDollarCommand.Execute("igno");
-		_viewModel.InsertCent25Command.Execute("igno");
-		_viewModel.InsertDollar20Command.Execute("igno");
-		_viewModel.InsertCentCommand.Execute("igno");
-		_viewModel.InsertCentCommand.Execute("igno");
-		_viewModel.InsertCentCommand.Execute("igno");
-		_viewModel.InsertCentCommand.Execute("igno");
-		_viewModel.ReturnMoneyCommand.Execute("igno");
-		Console.WriteLine(_viewModel.MoneyInTransaction);
-		Console.WriteLine(_viewModel.MoneyInside);
-	}
+		Initer.Init(@"Server=(localdb)\MSSQLLocalDB;Database=DddInPractice;Trusted_Connection=true");
 
-	public void BuySnack()
-	{
-		Console.WriteLine(">>insert money and buy a snack");
-		_viewModel.InsertCent25Command.Execute("igno");
-		_viewModel.InsertDollar20Command.Execute("igno");
-		_viewModel.InsertCentCommand.Execute("igno");
-		_viewModel.InsertCentCommand.Execute("igno");
-		_viewModel.BuySnackCommand.Execute("igno");
-		Console.WriteLine(_viewModel.MoneyInTransaction);
-		Console.WriteLine(_viewModel.MoneyInside);
+		SnackMachine snackMachine;
+		using (ISession session = SessionFactory.OpenSession())
+		{
+			snackMachine = session.Get<SnackMachine>(1L);
+		}
+		var useCases = new UseCases(new SnackMachineViewModel(snackMachine));
+			
+		useCases.Report();
+		useCases.ReturnMoney();
+		useCases.BuySnack();
+		
 	}
 }
