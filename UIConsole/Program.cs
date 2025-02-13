@@ -1,10 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.ComponentModel;
 using ConsoleApp;
 using Logic;
 
-// Initer.Init(@"Server=(localdb)\MSSQLLocalDB;Database=DddInPractice;Trusted_Connection=true");
+Initer.Init(@"Server=(localdb)\MSSQLLocalDB;Database=DddInPractice;Trusted_Connection=true");
 
 new UseCases().Return();
 new UseCases().BuySnack();

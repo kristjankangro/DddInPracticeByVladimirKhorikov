@@ -2,12 +2,16 @@
 
 namespace Logic;
 
-public sealed class SnackMachine : Entity
+public class SnackMachine : Entity
 {
-	public Money MoneyInside { get; private set; } = Zero;
-	public Money MoneyInTransaction { get; private set; } = Zero;
+	public SnackMachine()
+	{
+	}
 
-	public void InsertMoney(Money money)
+	public virtual Money MoneyInside { get; protected set; } = Zero;
+	public virtual Money MoneyInTransaction { get; protected set; } = Zero;
+
+	public virtual void InsertMoney(Money money)
 	{
 		Money[] allowed = [Cent, Cent10, Cent25, Dollar, Dollar5, Dollar20];
 		if (!allowed.Contains(money)) throw new InvalidOperationException("Invalid money");
@@ -15,12 +19,12 @@ public sealed class SnackMachine : Entity
 		MoneyInTransaction += money;
 	}
 
-	public void ReturnMoney()
+	public virtual void ReturnMoney()
 	{
 		MoneyInTransaction = Zero;
 	}
 
-	public void BuySnack()
+	public virtual void BuySnack()
 	{
 		MoneyInside += MoneyInTransaction;
 		MoneyInTransaction = Zero;

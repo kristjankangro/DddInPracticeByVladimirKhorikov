@@ -7,7 +7,7 @@ using FluentNHibernate.Conventions.Helpers;
 using FluentNHibernate.Conventions.Instances;
 using NHibernate;
 
-namespace Logic
+namespace DddInPractice.Logic
 {
     public static class SessionFactory
     {
@@ -53,7 +53,11 @@ namespace Logic
             public void Apply(IIdentityInstance instance)
             {
                 instance.Column(instance.EntityType.Name + "ID");
-                instance.GeneratedBy.HiLo("[dbo].[Ids]", "NextHigh", "9", "EntityName = '" + instance.EntityType.Name + "'");
+                instance.GeneratedBy.HiLo(
+                    "[dbo].[Ids]",
+                    "NextHigh", 
+                    "9", 
+                    "EntityName = '" + instance.EntityType.Name + "'");
             }
         }
     }

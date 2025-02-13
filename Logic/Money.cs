@@ -26,13 +26,15 @@ public class Money : ValueObject<Money>
 	public static Money Dollar5 => new Money(0, 0, 0, 0, 1, 0);
 	public static Money Dollar20 => new Money(0, 0, 0, 0, 0, 1);
 
+	private Money(){}
+	
 	public Money(
 		int cents1Count,
 		int cents10Count,
 		int cents25Count,
 		int dollar1Count,
 		int dollar5Count,
-		int dollar20Count)
+		int dollar20Count) : this()
 	{
 		if (cents1Count < 0) throw new InvalidOperationException();
 		if (cents10Count < 0) throw new InvalidOperationException();

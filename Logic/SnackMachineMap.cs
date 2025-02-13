@@ -6,17 +6,17 @@ namespace Logic
     {
         public SnackMachineMap()
         {
-            // Id(x => x.Id);
-            //
-            // Component(x => x.MoneyInside, y =>
-            // {
-            //     y.Map(x => x.OneCentCount);
-            //     y.Map(x => x.TenCentCount);
-            //     y.Map(x => x.QuarterCount);
-            //     y.Map(x => x.OneDollarCount);
-            //     y.Map(x => x.FiveDollarCount);
-            //     y.Map(x => x.TwentyDollarCount);
-            // });
+            Id(x => x.Id);
+            
+            Component(x => x.MoneyInside, y =>
+            {
+            y.Map(x => x.Cents1Count);
+            y.Map(x => x.Cents10Count);
+            y.Map(x => x.Cents25Count);
+            y.Map(x => x.Dollar1Count);
+            y.Map(x => x.Dollar5Count);
+            y.Map(x => x.Dollar20Count);
+            });
         }
     }
 }
