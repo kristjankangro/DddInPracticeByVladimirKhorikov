@@ -1,4 +1,6 @@
-namespace Logic;
+using static Logic.SnackPile;
+
+namespace Logic.Slot;
 
 public class Slot : Entity
 {
@@ -14,7 +16,7 @@ public class Slot : Entity
 	public Slot(SnackMachine snackMachine, int position) 
 		: this()
 	{
-		SnackPile = new SnackPile(null, 0,0);
+		SnackPile = Empty;
 		SnackMachine = snackMachine;
 		Position = position;
 	}

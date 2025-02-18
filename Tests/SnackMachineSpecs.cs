@@ -3,6 +3,7 @@ using FluentAssertions;
 using Logic;
 using Xunit;
 using static Logic.Money;
+using static Logic.Snack;
 
 namespace Tests;
 
@@ -42,7 +43,7 @@ public class SnackMachineSpecs
 	public void BuySnack_TradeInsertedCoinsForSnack()
 	{
 		var snackMachine = new SnackMachine();
-		snackMachine.LoadSnacks(1, new SnackPile(new Snack("mars bar"), 10, 1));
+		snackMachine.LoadSnacks(1, new SnackPile(MarsBar, 10, 1));
 		snackMachine.InsertMoney(Dollar);
 		snackMachine.BuySnack(1);
 		
@@ -67,7 +68,7 @@ public class SnackMachineSpecs
 	{
 		var snackMachine = new SnackMachine();
 		snackMachine
-			.LoadSnacks(1, new SnackPile(new Snack("mars bar"), 10, 3))
+			.LoadSnacks(1, new SnackPile(MarsBar, 10, 3))
 			.InsertMoney(Dollar);
 		
 		Action action = () => snackMachine.BuySnack(1);
@@ -96,7 +97,7 @@ public class SnackMachineSpecs
 	public void BuySnack_ReturnChangeAfter()
 	{
 		var snackMachine = new SnackMachine()
-			.LoadSnacks(1, new SnackPile(new Snack("mars bar"), 1, 0.5m))
+			.LoadSnacks(1, new SnackPile(MarsBar, 1, 0.5m))
 			.LoadMoney(Cent10*10)
 			.InsertMoney(Dollar)
 			.BuySnack(1);

@@ -19,7 +19,7 @@ namespace Logic
 				y.Map(x => x.Dollar20Count);
 			});
 			
-			HasMany<Slot>(Reveal.Member<SnackMachine>("Slots"))
+			HasMany<Slot.Slot>(Reveal.Member<SnackMachine>("Slots"))
 				.Cascade.SaveUpdate()
 				.Not.LazyLoad();
 		}

@@ -8,17 +8,17 @@ public class SnackMachine : AggregateRoot
 	{
 		MoneyInside = Zero;
 		MoneyInTransaction = 0;
-		Slots = new List<Slot>
+		Slots = new List<Slot.Slot>
 		{
-			new Slot(this, 1),
-			new Slot(this, 2),
-			new Slot(this, 3),
+			new Slot.Slot(this, 1),
+			new Slot.Slot(this, 2),
+			new Slot.Slot(this, 3),
 		};
 	}
 
 	public virtual Money MoneyInside { get; protected set; }
 	public virtual decimal MoneyInTransaction { get; protected set; }
-	protected virtual IList<Slot> Slots { get; set; }
+	protected virtual IList<Slot.Slot> Slots { get; set; }
 
 	public virtual SnackMachine InsertMoney(Money money)
 	{

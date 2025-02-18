@@ -13,11 +13,11 @@ public class TemporaryTest
 	{
 		SessionFactory.Init(@"Server=(localdb)\MSSQLLocalDB;Database=DddInPractice;Trusted_Connection=true");
 		var repo = new SnackMachineRepo();
-		SnackMachine sm = repo.GetById(1);
-		sm.InsertMoney(Dollar);
-		sm.InsertMoney(Dollar);
-		sm.InsertMoney(Dollar);
-		sm.BuySnack(1);
-		repo.Save(sm);
+		// SnackMachine sm = repo.GetById(1);
+		// sm.InsertMoney(Dollar);
+		// sm.InsertMoney(Dollar);
+		// sm.InsertMoney(Dollar);
+		// sm.BuySnack(1);
+		// repo.Save(sm);
 	}
 }

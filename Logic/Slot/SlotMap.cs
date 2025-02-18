@@ -2,7 +2,7 @@ using FluentNHibernate.Mapping;
 
 namespace Logic;
 
-public class SlotMap : ClassMap<Slot>
+public class SlotMap : ClassMap<Slot.Slot>
 {
 	public SlotMap()
 	{
