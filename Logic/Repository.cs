@@ -4,7 +4,7 @@ namespace Logic;
 
 public abstract class Repository<T> where T : AggregateRoot
 {
-	public T GetById(int id)
+	public T GetById(long id)
 	{
 		using (var session = SessionFactory.OpenSession())
 		{

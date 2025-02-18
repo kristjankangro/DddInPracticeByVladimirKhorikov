@@ -1,4 +1,5 @@
-﻿using FluentNHibernate.Mapping;
+﻿using FluentNHibernate;
+using FluentNHibernate.Mapping;
 
 namespace Logic
 {
@@ -17,6 +18,10 @@ namespace Logic
 				y.Map(x => x.Dollar5Count);
 				y.Map(x => x.Dollar20Count);
 			});
+			
+			HasMany<Slot>(Reveal.Member<SnackMachine>("Slots"))
+				.Cascade.SaveUpdate()
+				.Not.LazyLoad();
 		}
 	}
 }
