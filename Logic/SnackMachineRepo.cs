@@ -1,6 +1,3 @@
 namespace Logic;
 
-public class SnackMachineRepo : Repository<SnackMachine>
-{
-	
-}
+public class SnackMachineRepo : Repository<SnackMachine>;

@@ -11,11 +11,9 @@ internal class Program
 	{
 		Initer.Init(@"Server=(localdb)\MSSQLLocalDB;Database=DddInPractice;Trusted_Connection=true");
 
-		SnackMachine snackMachine;
-		using (ISession session = SessionFactory.OpenSession())
-		{
-			snackMachine = session.Get<SnackMachine>(1L);
-		}
+
+		SnackMachine snackMachine = new SnackMachineRepo().GetById(1L);
+		
 		var useCases = new UseCases(new SnackMachineViewModel(snackMachine));
 			
 		useCases.Report();

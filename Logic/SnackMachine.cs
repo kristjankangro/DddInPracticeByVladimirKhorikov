@@ -8,17 +8,17 @@ public class SnackMachine : AggregateRoot
 	{
 		MoneyInside = Zero;
 		MoneyInTransaction = 0;
-		Slots = new List<Slot.Slot>
+		Slots = new List<Slot>
 		{
-			new Slot.Slot(this, 1),
-			new Slot.Slot(this, 2),
-			new Slot.Slot(this, 3),
+			new Slot(this, 1),
+			new Slot(this, 2),
+			new Slot(this, 3),
 		};
 	}
 
 	public virtual Money MoneyInside { get; protected set; }
 	public virtual decimal MoneyInTransaction { get; protected set; }
-	protected virtual IList<Slot.Slot> Slots { get; set; }
+	protected virtual IList<Slot> Slots { get; set; }
 
 	public virtual SnackMachine InsertMoney(Money money)
 	{
@@ -63,6 +63,13 @@ public class SnackMachine : AggregateRoot
 	public virtual SnackPile GetSnackPile(int postion)
 	{
 		return Slots.Single(s => s.Position == postion).SnackPile;
+	}
+
+	public virtual IReadOnlyList<SnackPile> GetAllSnackPiles()
+	{
+		return Slots.OrderBy(x => x.Position)
+			.Select(x => x.SnackPile)
+			.ToList();
 	}
 
 	public virtual SnackMachine LoadMoney(Money money)

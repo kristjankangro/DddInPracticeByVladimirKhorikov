@@ -1,6 +1,6 @@
 using static Logic.SnackPile;
 
-namespace Logic.Slot;
+namespace Logic;
 
 public class Slot : Entity
 {
