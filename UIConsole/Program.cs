@@ -1,9 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using ConsoleApp;
-using DddInPractice.Logic;
 using Logic;
-using NHibernate;
 
 internal class Program
 {
@@ -16,9 +14,9 @@ internal class Program
 		
 		var useCases = new UseCases(new SnackMachineViewModel(snackMachine));
 			
-		useCases.Report();
-		useCases.ReturnMoney();
-		useCases.BuySnack();
-		
+		// useCases.Report();
+		// useCases.ReturnMoney();
+		// useCases.BuySnack();
+		useCases.InsertDollarBuy3DollarSnack();
 	}
 }

@@ -41,6 +41,14 @@ public class UseCases
 		_viewModel.BuySnackCommand.Execute("igno");
 		Summary();
 	}
+	
+	public void InsertDollarBuy3DollarSnack()
+	{
+		Console.WriteLine(">>insert money and buy a snack");
+		_viewModel.InsertDollarCommand.Execute("igno");
+		_viewModel.BuySnackCommand.Execute("3");
+		Summary();
+	}
 
 	private void Summary()
 	{

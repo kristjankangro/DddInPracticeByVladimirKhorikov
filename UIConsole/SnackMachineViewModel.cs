@@ -42,14 +42,14 @@ namespace ConsoleApp
 		public Command InsertDollar20Command { get; private set; }
 
 		public Command ReturnMoneyCommand { get; private set; }
-		public Command BuySnackCommand { get; private set; }
+		public Command<string> BuySnackCommand { get; private set; }
 
 
 		public SnackMachineViewModel(SnackMachine snackMachine)
 		{
 			_snackMachine = snackMachine;
 			_snackMachineRepo = new SnackMachineRepo();
-			BuySnackCommand = new Command(() => BuySnack());
+			BuySnackCommand = new Command<string>(BuySnack);
 			ReturnMoneyCommand = new Command(() => ReturnMoney());
 
 			InsertCentCommand = new Command(() => InsertMoney(Money.Cent));
@@ -60,9 +60,10 @@ namespace ConsoleApp
 			InsertDollar20Command = new Command(() => InsertMoney(Money.Dollar20));
 		}
 
-		private void BuySnack()
+		private void BuySnack(string positionString)
 		{
-			_snackMachine.BuySnack(1);
+			int pos = int.Parse(positionString);
+			_snackMachine.BuySnack(position:2);
 			_snackMachineRepo.Save(_snackMachine);
 			NotifyClient("You bought a snack");
 		}
@@ -83,6 +84,7 @@ namespace ConsoleApp
 		{
 			Notify(nameof(MoneyInTransaction));
 			Notify(nameof(MoneyInside));
+			Notify(nameof(Piles));
 			Message = message;
 			Console.WriteLine(Message);
 		}
