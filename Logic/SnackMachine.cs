@@ -32,25 +32,47 @@ public class SnackMachine : AggregateRoot
 
 	public virtual void ReturnMoney()
 	{
-		Money returnMoney = MoneyInside.Allocate(MoneyInTransaction);
+		Money returnMoney = MoneyInside.AllocateCore(MoneyInTransaction);
 		MoneyInside -= returnMoney;
 		MoneyInTransaction = 0;
 	}
 
+	public virtual string CanBuySnack(int pos)
+	{
+		SnackPile snackPile = GetSnackPile(pos);
+		if (snackPile.Quantity == 0)
+		{
+			return "No snack available";
+		}
+
+		if (MoneyInTransaction < snackPile.Price)
+		{
+			return "Not enough money";
+		}
+		
+		if(!MoneyInside.CanAllocate(MoneyInTransaction - snackPile.Price))
+			return "Not enough change";
+
+		return string.Empty;
+	}
+
 	public virtual SnackMachine BuySnack(int position)
 	{
-		var slot = Slots.FirstOrDefault(s => s.Position == position);
-
-		if (MoneyInTransaction < slot.SnackPile.Price) throw new InvalidOperationException();
-
+		if(CanBuySnack(position) != string.Empty)
+			throw new InvalidOperationException("Can't buy a snack");
+		
+		var slot = GetSlot(position);
 		slot.SnackPile = slot.SnackPile.SubtractOne();
 
-		var change = MoneyInside.Allocate(MoneyInTransaction - slot.SnackPile.Price);
-		if (change.Amount < MoneyInTransaction - slot.SnackPile.Price) throw new InvalidOperationException();
-		
+		var change = MoneyInside.AllocateCore(MoneyInTransaction - slot.SnackPile.Price);
 		MoneyInside -= change;
 		MoneyInTransaction = 0;
 		return this;
+	}
+
+	private Slot GetSlot(int position)
+	{
+		return Slots.Single(s => s.Position == position);
 	}
 
 	public virtual SnackMachine LoadSnacks(int position, SnackPile snack)

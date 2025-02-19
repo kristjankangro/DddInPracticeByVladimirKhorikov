@@ -116,7 +116,13 @@ public class Money : ValueObject<Money>
 		return "$" + Amount.ToString("0.00");
 	}
 
-	public Money Allocate(decimal amount)
+	public bool CanAllocate(decimal amount)
+	{
+		Money money = AllocateCore(amount);
+		return money.Amount == amount;
+	}
+
+	public Money AllocateCore(decimal amount)
 	{
 		int twentyDollarCount = Math.Min((int)(amount / 20), Dollar20Count);
 		amount = amount - twentyDollarCount * 20;

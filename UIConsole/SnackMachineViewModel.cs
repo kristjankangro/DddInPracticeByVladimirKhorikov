@@ -63,6 +63,14 @@ namespace ConsoleApp
 		private void BuySnack(string positionString)
 		{
 			int pos = int.Parse(positionString);
+
+			string error = _snackMachine.CanBuySnack(pos);
+			if (error != string.Empty)
+			{
+				NotifyClient(error);
+				return;
+			}
+			
 			_snackMachine.BuySnack(position:2);
 			_snackMachineRepo.Save(_snackMachine);
 			NotifyClient("You bought a snack");
