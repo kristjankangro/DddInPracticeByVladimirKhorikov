@@ -1,4 +1,4 @@
-namespace Logic;
+namespace Logic.SharedKernel;
 
 //Value Object
 public class Money : ValueObject<Money>

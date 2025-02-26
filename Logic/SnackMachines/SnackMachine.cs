@@ -1,4 +1,6 @@
-﻿using static Logic.Money;
+﻿using Logic.Common;
+using Logic.SharedKernel;
+using static Logic.SharedKernel.Money;
 
 namespace Logic;
 

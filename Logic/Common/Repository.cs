@@ -1,6 +1,6 @@
 using DddInPractice.Logic;
 
-namespace Logic;
+namespace Logic.Common;
 
 public abstract class Repository<T> where T : AggregateRoot
 {

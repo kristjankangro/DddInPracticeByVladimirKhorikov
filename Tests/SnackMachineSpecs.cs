@@ -2,7 +2,7 @@ using System;
 using FluentAssertions;
 using Logic;
 using Xunit;
-using static Logic.Money;
+using static Logic.SharedKernel.Money;
 using static Logic.Snack;
 
 namespace Tests;

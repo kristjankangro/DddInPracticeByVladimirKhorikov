@@ -2,7 +2,7 @@ using DddInPractice.Logic;
 using Logic;
 using NHibernate;
 using Xunit;
-using static Logic.Money;
+using static Logic.SharedKernel.Money;
 
 namespace Tests;
 

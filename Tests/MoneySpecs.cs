@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Logic;
+using Logic.SharedKernel;
 using Xunit;
 
 namespace Tests;

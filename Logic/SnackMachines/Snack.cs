@@ -1,3 +1,5 @@
+using Logic.Common;
+
 namespace Logic;
 
 public class Snack : AggregateRoot
