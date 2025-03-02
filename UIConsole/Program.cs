@@ -18,11 +18,12 @@ internal class Program
 		// useCases.Report();
 		// useCases.ReturnMoney();
 		// useCases.BuySnack();
-		useCases.InsertDollarBuy3DollarSnack();
+		// useCases.InsertDollarBuy3DollarSnack();
 
 
 		var atm = new AtmRepo().GetById(1L);
 		var atmView = new AtmViewModel(atm);
-		var usesCases = new UseCasesAtm(atmView);
+		var usesCasesAtm = new UseCasesAtm(atmView);
+		usesCasesAtm.TakeOneDollar();
 	}
 }

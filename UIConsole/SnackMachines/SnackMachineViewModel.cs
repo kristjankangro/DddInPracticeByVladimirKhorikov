@@ -9,7 +9,7 @@ namespace ConsoleApp
 	{
 		private readonly SnackMachine _snackMachine;
 		private readonly SnackMachineRepo _snackMachineRepo;
-		private string _message;
+		
 		public override string Caption => "Snack Machine";
 		public string MoneyInTransaction => $"Current money in transaction:  {_snackMachine.MoneyInTransaction}";
 		public Money MoneyInside => _snackMachine.MoneyInside;
@@ -24,7 +24,7 @@ namespace ConsoleApp
 			}
 		}
 
-
+		private string _message;
 		public string Message
 		{
 			get { return _message; }

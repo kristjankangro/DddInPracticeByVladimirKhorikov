@@ -12,7 +12,7 @@ public class AtmSpec
 	{
 		var atm = new Atm();
 		atm.LoadMoney(Dollar);
-		atm.Withdraw(1);
+		atm.TakeMoney(1);
 			
 		atm.MoneyInside.Should().Be(Zero);
 		atm.MoneyCharged.Should().Be(1.01m);
@@ -24,7 +24,7 @@ public class AtmSpec
 		var atm = new Atm();
 		atm.LoadMoney(Cent);
 		
-		atm.Withdraw(0.01m);
+		atm.TakeMoney(0.01m);
 		
 		atm.MoneyCharged.Should().Be(0.02m);
 	}
@@ -35,7 +35,7 @@ public class AtmSpec
 		var atm = new Atm();
 		atm.LoadMoney(Dollar + Cent10);
 		
-		atm.Withdraw(1.1m);
+		atm.TakeMoney(1.1m);
 		atm.MoneyCharged.Should().Be(1.12m);
 	}
 }

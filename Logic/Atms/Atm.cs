@@ -11,7 +11,7 @@ public class Atm : AggregateRoot
 	public virtual Money MoneyInside { get; protected set; } = Zero;
 	public virtual decimal MoneyCharged { get; protected set; }
 
-	public virtual string CanWithdraw(decimal amount)
+	public virtual string CanTakeMoney(decimal amount)
 	{
 		if (amount <= 0) return "Cannot withdraw 0";
 		if (MoneyInside.Amount < amount) return "Cannot withdraw, not enough money inside";
@@ -23,9 +23,9 @@ public class Atm : AggregateRoot
 		return string.Empty;
 	}
 
-	public virtual void Withdraw(decimal amount)
+	public virtual void TakeMoney(decimal amount)
 	{
-		if (CanWithdraw(amount) != string.Empty) 
+		if (CanTakeMoney(amount) != string.Empty) 
 			throw new InvalidOperationException($"Cannot withdraw {amount}");
 
 		Money output = MoneyInside.AllocateCore(amount);
@@ -35,14 +35,14 @@ public class Atm : AggregateRoot
 		MoneyCharged += moneyWithCharge;
 	}
 
-	private static decimal CalculateAmountWithComission(decimal amount)
+	public decimal CalculateAmountWithComission(decimal amount)
 	{
 		var c = amount * CommissionRate;
 		return amount +
 		       (c < MinimumCommission ? MinimumCommission : Math.Round(c, 2, MidpointRounding.ToPositiveInfinity));
 	}
 
-	public void LoadMoney(Money money)
+	public virtual void LoadMoney(Money money)
 	{
 		MoneyInside += money;
 	}

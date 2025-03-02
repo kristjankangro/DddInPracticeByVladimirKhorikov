@@ -9,8 +9,16 @@ public class UseCasesAtm
 		_viewModel = atmViewModel;
 	}
 
-	public void DoSomeAtmStuff(AtmViewModel atmViewModel)
+	public void TakeOneDollar()
 	{
-		Console.WriteLine("You charged your money");
+		Console.WriteLine(">>take one dollar usecase");
+		_viewModel.TakeMoneyCommand.Execute(1m);
+		Summary();
+	}
+	
+	private void Summary()
+	{
+		Console.WriteLine(_viewModel.MoneyCharged);
+		Console.WriteLine(_viewModel.MoneyInside);
 	}
 }
