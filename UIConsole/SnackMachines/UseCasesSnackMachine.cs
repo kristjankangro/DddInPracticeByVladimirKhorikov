@@ -1,12 +1,10 @@
-using Logic;
+namespace ConsoleApp.SnackMachines;
 
-namespace ConsoleApp;
-
-public class UseCases
+public class UseCasesSnackMachine
 {
 	private SnackMachineViewModel _viewModel;
 
-	public UseCases(SnackMachineViewModel viewModel)
+	public UseCasesSnackMachine(SnackMachineViewModel viewModel)
 	{
 		_viewModel = viewModel;
 	}
