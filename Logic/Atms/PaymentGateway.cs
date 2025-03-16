@@ -2,7 +2,7 @@ namespace Logic.Atms;
 
 public class PaymentGateway
 {
-	public void ChargePayemnt(decimal)
+	public void ChargePayemnt(decimal amount)
 	{
 		
 	}

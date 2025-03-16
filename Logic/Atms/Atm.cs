@@ -1,3 +1,5 @@
+using DomainDrivenDesign.Logic.Atms;
+using DomainDrivenDesign.Logic.Common;
 using Logic.Common;
 using Logic.SharedKernel;
 using static Logic.SharedKernel.Money;
@@ -8,7 +10,7 @@ public class Atm : AggregateRoot
 {
 	private const decimal CommissionRate = 0.01m;
 	private const decimal MinimumCommission = 0.01m;
-	public virtual Money MoneyInside { get; protected set; } = Zero;
+	public virtual Money MoneyInside { get; protected set; } = None;
 	public virtual decimal MoneyCharged { get; protected set; }
 
 	public virtual string CanTakeMoney(decimal amount)
@@ -31,8 +33,10 @@ public class Atm : AggregateRoot
 		Money output = MoneyInside.AllocateCore(amount);
 		MoneyInside -= output;
 
-		decimal moneyWithCharge = CalculateAmountWithComission(amount);
-		MoneyCharged += moneyWithCharge;
+		decimal amountWithCommission = CalculateAmountWithComission(amount);
+		MoneyCharged += amountWithCommission;
+
+		DomainEvents.Raise(new BalanceChangedEvent(amountWithCommission));
 	}
 
 	public decimal CalculateAmountWithComission(decimal amount)

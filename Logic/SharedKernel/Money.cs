@@ -18,7 +18,7 @@ public class Money : ValueObject<Money>
 	                         + Dollar20Count * 20;
 
 
-	public static Money Zero => new(0, 0, 0, 0, 0, 0);
+	public static Money None => new(0, 0, 0, 0, 0, 0);
 	public static Money Cent => new Money(1, 0, 0, 0, 0, 0);
 	public static Money Cent10 => new Money(0, 1, 0, 0, 0, 0);
 	public static Money Cent25 => new Money(0, 0, 1, 0, 0, 0);

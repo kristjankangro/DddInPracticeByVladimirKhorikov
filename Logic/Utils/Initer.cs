@@ -1,4 +1,5 @@
 ﻿using DddInPractice.Logic;
+using DomainDrivenDesign.Logic.Management;
 
 namespace Logic
 {
@@ -7,6 +8,7 @@ namespace Logic
         public static void Init(string connectionString)
         {
             SessionFactory.Init(connectionString);
+            HeadOfficeInstance.Init();
         }
     }
 }

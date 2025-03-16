@@ -44,11 +44,14 @@ public class AtmViewModel : ViewModel
 			return;
 		}
 		
-		decimal amountWithCharge = _atm.CalculateAmountWithComission(amount);
+		var amountWithCharge = _atm.CalculateAmountWithComission(amount);
 		_paymentGateway.ChargePayemnt(amountWithCharge);
 		_atm.TakeMoney(amount);
 		_repo.Save(_atm);
 
+		// var headOffice = GetHeadOfficeInstance();
+		// headOffice.Balane += amountWithCharge;
+		// _officeRepository.Save(headOffice);
 		NotifyClient($"You have taken money {amount:C2}.");
 	}
 

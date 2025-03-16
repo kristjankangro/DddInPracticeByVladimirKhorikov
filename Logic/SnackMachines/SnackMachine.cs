@@ -8,7 +8,7 @@ public class SnackMachine : AggregateRoot
 {
 	public SnackMachine()
 	{
-		MoneyInside = Zero;
+		MoneyInside = None;
 		MoneyInTransaction = 0;
 		Slots = new List<Slot>
 		{
@@ -100,5 +100,15 @@ public class SnackMachine : AggregateRoot
 	{
 		MoneyInside += money;
 		return this;
+	}
+
+	public virtual Money UnloadMoney()
+	{
+		if (MoneyInTransaction > 0)
+			throw new InvalidOperationException();
+
+		Money money = MoneyInside;
+		MoneyInside = Money.None;
+		return money;
 	}
 }

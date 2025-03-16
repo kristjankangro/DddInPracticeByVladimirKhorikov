@@ -1,4 +1,5 @@
 using DddInPractice.Logic;
+using DomainDrivenDesign.Logic.Management;
 using Logic;
 using NHibernate;
 using Xunit;
@@ -12,12 +13,8 @@ public class TemporaryTest
 	public void Test()
 	{
 		SessionFactory.Init(@"Server=(localdb)\MSSQLLocalDB;Database=DddInPractice;Trusted_Connection=true");
-		var repo = new SnackMachineRepo();
-		// SnackMachine sm = repo.GetById(1);
-		// sm.InsertMoney(Dollar);
-		// sm.InsertMoney(Dollar);
-		// sm.InsertMoney(Dollar);
-		// sm.BuySnack(1);
-		// repo.Save(sm);
+		
+		HeadOfficeInstance.Init();
+		HeadOffice headOffice = HeadOfficeInstance.Instance;
 	}
 }
