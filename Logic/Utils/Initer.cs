@@ -1,7 +1,8 @@
 ﻿using DddInPractice.Logic;
+using DomainDrivenDesign.Logic.Common;
 using DomainDrivenDesign.Logic.Management;
 
-namespace Logic
+namespace DomainDrivenDesign.Logic.Utils
 {
     public static class Initer
     {
@@ -9,6 +10,7 @@ namespace Logic
         {
             SessionFactory.Init(connectionString);
             HeadOfficeInstance.Init();
+            DomainEvents.Init();
         }
     }
 }
