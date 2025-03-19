@@ -1,9 +1,7 @@
 using DddInPractice.Logic;
 using DomainDrivenDesign.Logic.Management;
 using Logic;
-using NHibernate;
 using Xunit;
-using static Logic.SharedKernel.Money;
 
 namespace Tests;
 

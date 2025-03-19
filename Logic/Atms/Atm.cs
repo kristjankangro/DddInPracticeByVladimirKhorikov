@@ -39,7 +39,7 @@ public class Atm : AggregateRoot
 		DomainEvents.Raise(new BalanceChangedEvent(amountWithCommission));
 	}
 
-	public decimal CalculateAmountWithComission(decimal amount)
+	public virtual decimal CalculateAmountWithComission(decimal amount)
 	{
 		var c = amount * CommissionRate;
 		return amount +
