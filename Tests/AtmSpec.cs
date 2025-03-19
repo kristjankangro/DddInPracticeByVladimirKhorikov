@@ -1,6 +1,5 @@
 using DomainDrivenDesign.Logic.Atms;
 using DomainDrivenDesign.Logic.Common;
-using DomainDrivenDesign.Logic.Utils;
 using FluentAssertions;
 using Logic;
 using Logic.Atms;
