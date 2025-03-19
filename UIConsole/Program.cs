@@ -3,6 +3,7 @@
 using ConsoleApp;
 using ConsoleApp.Atms;
 using ConsoleApp.SnackMachines;
+using DomainDrivenDesign.Logic.Utils;
 using Logic;
 using Logic.Atms;
 
