@@ -25,6 +25,8 @@ public class AtmSpec
 	[Fact]
 	public void Withdrawal_CommissionIsAtLeastOneCent()
 	{
+		Initer.Init(@"Server=(localdb)\MSSQLLocalDB;Database=DddInPractice;Trusted_Connection=true");
+
 		var atm = new Atm();
 		atm.LoadMoney(Cent);
 		

@@ -1,6 +1,5 @@
 using DddInPractice.Logic;
 using DomainDrivenDesign.Logic.Management;
-using Logic;
 using Xunit;
 
 namespace Tests;
