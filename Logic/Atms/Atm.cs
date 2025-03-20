@@ -30,13 +30,15 @@ public class Atm : AggregateRoot
 		if (CanTakeMoney(amount) != string.Empty) 
 			throw new InvalidOperationException($"Cannot withdraw {amount}");
 
-		Money output = MoneyInside.AllocateCore(amount);
+		var output = MoneyInside.AllocateCore(amount);
 		MoneyInside -= output;
 
-		decimal amountWithCommission = CalculateAmountWithComission(amount);
+		var amountWithCommission = CalculateAmountWithComission(amount);
 		MoneyCharged += amountWithCommission;
-
-		DomainEvents.Raise(new BalanceChangedEvent(amountWithCommission));
+		
+		AddDomainEvent(new BalanceChangedEvent(amountWithCommission));
+		// classic approac
+		// DomainEvents.Raise(new BalanceChangedEvent(amountWithCommission));
 	}
 
 	public virtual decimal CalculateAmountWithComission(decimal amount)

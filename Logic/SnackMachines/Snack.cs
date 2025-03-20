@@ -1,3 +1,4 @@
+using DomainDrivenDesign.Logic.Common;
 using Logic.Common;
 
 namespace Logic;

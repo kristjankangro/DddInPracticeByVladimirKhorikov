@@ -1,4 +1,4 @@
-﻿using DddInPractice.Logic;
+﻿using DomainDrivenDesign.Logic.Utils;
 using Logic;
 using NHibernate;
 

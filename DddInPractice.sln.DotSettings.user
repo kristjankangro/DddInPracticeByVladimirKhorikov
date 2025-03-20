@@ -17,12 +17,10 @@
     &lt;TestId&gt;xUnit::699DABDF-FCD2-4726-B9A8-5E144C6D7249::net8.0::Tests.TemporaryTest.Test&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d2becb56_002D228e_002D48a2_002Db8b2_002D3df2fd985cfd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TakeMoney_RaisesAnEvent" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::699DABDF-FCD2-4726-B9A8-5E144C6D7249::net8.0::Tests.AtmSpec.TakeMoney_RaisesAnEvent&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::699DABDF-FCD2-4726-B9A8-5E144C6D7249::net8.0::Tests.TemporaryTest.Test&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=cff83a6d_002D319a_002D47fe_002D9f8a_002D1fd98d1e2836/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
 	
 	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/SpawnedProcessesKnownList/=sqlservr_002Eexe/@EntryIndexedValue">KillOrphaned</s:String>
 	

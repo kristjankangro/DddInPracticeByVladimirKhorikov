@@ -1,5 +1,4 @@
 ﻿using ConsoleApp.Common;
-using DddInPractice.Logic;
 using Logic;
 using Logic.SharedKernel;
 

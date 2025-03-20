@@ -1,4 +1,5 @@
-using DddInPractice.Logic;
+using DomainDrivenDesign.Logic.Common;
+using DomainDrivenDesign.Logic.Utils;
 
 namespace Logic.Common;
 

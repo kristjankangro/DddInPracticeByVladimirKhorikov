@@ -1,9 +1,19 @@
-namespace Logic.Common;
+using Logic;
+
+namespace DomainDrivenDesign.Logic.Common;
 
 public abstract class AggregateRoot : Entity
 {
-	//optimistic locking
-	//domain events
-	//if not used no need for aggregate root
+	private readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();	
+	public virtual IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;
 	
+	protected virtual void AddDomainEvent(IDomainEvent domainEvent)
+	{
+		_domainEvents.Add(domainEvent);
+	}
+	
+	public virtual void ClearDomainEvents()
+	{
+		_domainEvents.Clear();
+	}
 }

@@ -9,7 +9,7 @@ namespace DomainDrivenDesign.Logic.Management
         public void Handle(BalanceChangedEvent domainEvent)
         {
             var repository = new HeadOfficeRepository();
-            HeadOffice headOffice = HeadOfficeInstance.Instance;
+            var headOffice = HeadOfficeInstance.Instance;
             headOffice.ChangeBalance(domainEvent.Delta);
             repository.Save(headOffice);
         }

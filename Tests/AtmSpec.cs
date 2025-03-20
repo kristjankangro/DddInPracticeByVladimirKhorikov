@@ -52,13 +52,22 @@ public class AtmSpec
 		var atm = new Atm();
 		atm.LoadMoney(Dollar);
 		
-		BalanceChangedEvent balanceChangedEvt = null;
-		DomainEvents.Register<BalanceChangedEvent>(evt => balanceChangedEvt = evt);
-		atm.TakeMoney(1);
-
-		balanceChangedEvt.Should().NotBeNull();
 		
-		balanceChangedEvt.Delta.Should().Be(1.01m);
+		atm.TakeMoney(1m);
 
+		atm.ShouldContainBalanceChangedEvent(1.01m);
+
+	}
+}
+
+internal static class AtmSpecExtensions
+{
+	public static void ShouldContainBalanceChangedEvent(this Atm atm, decimal delta)
+	{
+		var balanceChangedEvt = (BalanceChangedEvent) atm.DomainEvents
+			.SingleOrDefault(x => x.GetType() == typeof(BalanceChangedEvent))!;
+		
+		balanceChangedEvt.Should().NotBeNull();
+		balanceChangedEvt.Delta.Should().Be(delta);
 	}
 }

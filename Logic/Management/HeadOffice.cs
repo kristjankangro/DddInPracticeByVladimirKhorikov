@@ -1,4 +1,5 @@
-﻿using Logic;
+﻿using DomainDrivenDesign.Logic.Common;
+using Logic;
 using Logic.Atms;
 using Logic.Common;
 using Logic.SharedKernel;
