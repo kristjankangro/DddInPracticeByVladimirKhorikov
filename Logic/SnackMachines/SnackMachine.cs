@@ -42,21 +42,16 @@ public class SnackMachine : AggregateRoot
 
 	public virtual string CanBuySnack(int pos)
 	{
-		SnackPile snackPile = GetSnackPile(pos);
+		var snackPile = GetSnackPile(pos);
 		if (snackPile.Quantity == 0)
-		{
 			return "No snack available";
-		}
 
 		if (MoneyInTransaction < snackPile.Price)
-		{
 			return "Not enough money";
-		}
 		
-		if(!MoneyInside.CanAllocate(MoneyInTransaction - snackPile.Price))
-			return "Not enough change";
-
-		return string.Empty;
+		return !MoneyInside.CanAllocate(MoneyInTransaction - snackPile.Price) 
+			? "Not enough change" 
+			: string.Empty;
 	}
 
 	public virtual SnackMachine BuySnack(int position)
