@@ -51,12 +51,9 @@ public class AtmSpec
 		Initer.Init(@"Server=(localdb)\MSSQLLocalDB;Database=DddInPractice;Trusted_Connection=true");
 		var atm = new Atm();
 		atm.LoadMoney(Dollar);
-		
-		
 		atm.TakeMoney(1m);
 
 		atm.ShouldContainBalanceChangedEvent(1.01m);
-
 	}
 }
 

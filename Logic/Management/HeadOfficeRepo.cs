@@ -2,7 +2,7 @@
 
 namespace DomainDrivenDesign.Logic.Management
 {
-	public class HeadOfficeRepository : Repository<HeadOffice>
+	public class HeadOfficeRepo : Repository<HeadOffice>
 	{
 	}
 }

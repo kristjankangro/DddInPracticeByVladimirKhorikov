@@ -16,17 +16,16 @@ public class DomainEvents
 
 	public static void Dispatch(IDomainEvent domainEvent)
 	{
-		foreach (Type handlerType in _handlers)
+		foreach (var handlerType in _handlers)
 		{
 			var canHandle = handlerType.GetInterfaces()
 				.Any(x => x.IsGenericType 
 				          && x.GetGenericTypeDefinition() == typeof(IHandler<>) 
 				          && x.GetGenericArguments()[0] == domainEvent.GetType());
-			if (canHandle)
-			{
-				dynamic handler = Activator.CreateInstance(handlerType);
-				handler.Handle((dynamic)domainEvent);
-			}
+			if (!canHandle) continue;
+			
+			dynamic handler = Activator.CreateInstance(handlerType);
+			handler.Handle((dynamic)domainEvent);
 		}
 	}
 

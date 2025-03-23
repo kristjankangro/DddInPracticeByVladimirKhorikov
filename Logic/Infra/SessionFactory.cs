@@ -37,16 +37,17 @@ namespace DomainDrivenDesign.Logic.Utils
 					.Conventions.Add<TableNameConvention>()
 					.Conventions.Add<HiLoConvention>()
 				)
+				//configure hibernate domain event listeners
 				.ExposeConfiguration(x =>
 				{
-					x.EventListeners.PostCommitUpdateEventListeners = 
-						new IPostUpdateEventListener[] { new EventListener() };
-					x.EventListeners.PostCommitInsertEventListeners = 
-						new IPostInsertEventListener[] { new EventListener() };
-					x.EventListeners.PostCommitDeleteEventListeners = 
-						new IPostDeleteEventListener[] { new EventListener() };
-					x.EventListeners.PostCollectionUpdateEventListeners = 
-						new IPostCollectionUpdateEventListener[] { new EventListener() };
+					x.EventListeners.PostCommitUpdateEventListeners =
+						[new EventListener()];
+					x.EventListeners.PostCommitInsertEventListeners =
+						[new EventListener()];
+					x.EventListeners.PostCommitDeleteEventListeners =
+						[new EventListener()];
+					x.EventListeners.PostCollectionUpdateEventListeners =
+						[new EventListener()];
 				});
 
 			return configuration.BuildSessionFactory();

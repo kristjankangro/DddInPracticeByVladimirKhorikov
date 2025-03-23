@@ -8,7 +8,7 @@ public static class HeadOfficeInstance
 
     public static void Init()
     {
-        var repository = new HeadOfficeRepository();
+        var repository = new HeadOfficeRepo();
         Instance = repository.GetById(HeadOfficeId);
     }
 }

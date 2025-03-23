@@ -36,7 +36,9 @@ public class Atm : AggregateRoot
 		var amountWithCommission = CalculateAmountWithComission(amount);
 		MoneyCharged += amountWithCommission;
 		
+		// event is added to internal domain events list
 		AddDomainEvent(new BalanceChangedEvent(amountWithCommission));
+		
 		// classic approac
 		// DomainEvents.Raise(new BalanceChangedEvent(amountWithCommission));
 	}
